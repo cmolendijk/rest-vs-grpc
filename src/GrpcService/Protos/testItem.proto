@@ -1,0 +1,32 @@
+syntax = "proto3"; 
+
+import "google/protobuf/timestamp.proto";
+
+option csharp_namespace = "GrpcService.Services";
+
+package testItem;
+
+// The greeting service definition.
+service TestItemEndpoint {
+  // Sends a greeting
+  rpc CreateTestItem (CreateTestItemRequest) returns (TestItemReply);
+  rpc GetTestItems(EmptyParameters) returns (stream TestItemReply);
+}
+
+// The request message containing the user's name.
+message CreateTestItemRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings.
+message TestItemReply {
+  int32 id = 1;
+  string name = 2;
+  google.protobuf.Timestamp createdAt = 3;
+}
+
+message TestItemsReply {
+    repeated TestItemReply items = 1;
+}
+
+message EmptyParameters {}
